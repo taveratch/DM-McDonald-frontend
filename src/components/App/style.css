@@ -25,6 +25,30 @@
   font-family: Apercu Regular Pro;
 }
 
+.navbar-brand {
+  font-family: Gotham XNarrow Black;
+  font-size: 24px;
+}
+
+@media (min-width: 768px) {
+  .navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.section-greeting {
+  padding-top: 200px;
+}
+
+.btn-generate {
+  margin-top: 20px;
+}
+
+.section-meal {
+  padding: 500px 500px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
