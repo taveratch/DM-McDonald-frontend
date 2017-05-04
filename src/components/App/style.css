@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -19,6 +15,16 @@
 
 .App h1 {
   font-family: Gotham XNarrow Black;
+  text-align: center;
+}
+
+.App
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Gotham XNarrow Medium;
 }
 
 .App p {
@@ -39,6 +45,7 @@
 
 .section-greeting {
   padding-top: 200px;
+  text-align: center;
 }
 
 .btn-generate {
@@ -46,7 +53,11 @@
 }
 
 .section-meal {
-  padding: 500px 500px;
+  padding: 500px 0px 500px 0px;
+}
+
+.media {
+  display: inline;
 }
 
 @keyframes App-logo-spin {
