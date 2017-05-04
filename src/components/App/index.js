@@ -1,6 +1,5 @@
-/*eslint no-unused-vars: "error"*/
 import React from 'react';
-import NavBar from './nav'; // eslint-disable-line
+import NavBar from './nav';
 import './style.css';
 
 class App extends React.Component {
@@ -8,6 +7,9 @@ class App extends React.Component {
 		return (
       <div className="App">
         <NavBar />
+        <div>
+
+        </div>
       </div>
     );
 	}
