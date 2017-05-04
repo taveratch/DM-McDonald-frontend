@@ -17,6 +17,14 @@
   font-size: large;
 }
 
+.App h1 {
+  font-family: Gotham XNarrow Black;
+}
+
+.App p {
+  font-family: Apercu Regular Pro;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

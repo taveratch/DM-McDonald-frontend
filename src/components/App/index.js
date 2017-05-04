@@ -8,7 +8,8 @@ class App extends React.Component {
       <div className="App">
         <NavBar />
         <div>
-
+					<h1>McDonald's Healthy Meal Generator</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
     );

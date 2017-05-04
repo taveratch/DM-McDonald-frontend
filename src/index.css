@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Gotham XNarrow Black";
+  src: local("Gotham-XNarrow-Black"), url("./assets/fonts/Gotham-XNarrow-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Gotham XNarrow Medium";
+  src: local("Gotham-XNarrow-Medium"), url("./assets/fonts/Gotham-XNarrow-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Apercu Regular Pro";
+  src: local("apercu_regular_pro"), url("./assets/fonts/apercu_regular_pro.otf") format("opentype");
+}
+
 body {
   margin: 0;
   padding: 0;
