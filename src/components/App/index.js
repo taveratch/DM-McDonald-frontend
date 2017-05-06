@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
+import Menu from './menu.js';
 import './style.css';
 
 class App extends React.Component {
@@ -53,95 +54,23 @@ class App extends React.Component {
 									<div className="row">
 										<div className="col-md-4">
 											<h2 className="text-center">Breakfast</h2>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
+											<Menu />
+											<Menu />
+											<Menu />
 										</div>
 
 										<div className="col-md-4">
 											<h2 className="text-center">Lunch</h2>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
+											<Menu />
+											<Menu />
+											<Menu />
 										</div>
 
 										<div className="col-md-4">
 											<h2 className="text-center">Dinner</h2>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div className="media">
-												<div className="media-left">
-													<img src="https://www.w3schools.com/bootstrap/img_avatar1.png" className="media-object" style={{width: '60px'}} />
-												</div>
-												<div className="media-body">
-													<h4 className="media-heading">Left-aligned</h4>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
+											<Menu />
+											<Menu />
+											<Menu />
 										</div>
 									</div>
 								</div>
