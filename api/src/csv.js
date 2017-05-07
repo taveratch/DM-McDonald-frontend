@@ -41,7 +41,7 @@ csvAPI.get('/centroids', async (req, res) => {
 
 csvAPI.get('/user/centroid', async (req, res) => {
 	console.log('Getting user centroid');
-	let sex = req.query['sex'];
+	let sex = req.query['sex'] || 'male'; //male by default
 	let dataLocation = __dirname + '/data/menu.csv';
 	let factsLocation = __dirname + '/data/facts.csv';
 	let results = await readCSV(dataLocation);
