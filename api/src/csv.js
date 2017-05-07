@@ -44,11 +44,14 @@ csvAPI.get('/user/centroid', async (req, res) => {
 	let sex = req.query['sex'] || 'male'; //male by default
 	let dataLocation = __dirname + '/data/menu.csv';
 	let factsLocation = __dirname + '/data/facts.csv';
+	let centroidsLocation = __dirname + '/data/centroids.csv';
 	let results = await readCSV(dataLocation);
 	let facts = await readCSV(factsLocation);
+	let centroids = await readCSV(centroidsLocation);
 	let fact = findFactFromSex(facts, sex);
 	let userCentroid = normalize.normalize(results, fact); // male
-	res.send(userCentroid);
+	let cluster = normalize.getCluster(centroids, userCentroid);
+	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster});
 });
 
 function findFactFromSex(facts, sex) {
