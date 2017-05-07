@@ -42,20 +42,21 @@ csvAPI.get('/centroids', async (req, res) => {
 csvAPI.get('/user/centroid', async (req, res) => {
 	console.log('Getting user centroid');
 	let sex = req.query['sex'] || 'male'; //male by default
+	let age = parseInt(req.query['age']) || 20;
 	let dataLocation = __dirname + '/data/menu.csv';
-	let factsLocation = __dirname + '/data/facts.csv';
+	let factsLocation = __dirname + `/data/facts-${sex}.csv`;
 	let centroidsLocation = __dirname + '/data/centroids.csv';
 	let results = await readCSV(dataLocation);
 	let facts = await readCSV(factsLocation);
 	let centroids = await readCSV(centroidsLocation);
-	let fact = findFactFromSex(facts, sex);
+	let fact = findFactFromAge(facts, age);
 	let userCentroid = normalize.normalize(results, fact); // male
 	let cluster = normalize.getCluster(centroids, userCentroid);
 	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster});
 });
 
-function findFactFromSex(facts, sex) {
-	return _.find(facts, (o) => _.lowerCase(o['Sex']) === _.lowerCase(sex) );
+function findFactFromAge(facts, age) {
+	return _.find(facts, (o) => parseInt(o['Age']) === age);
 }
 
 module.exports = csvAPI;
