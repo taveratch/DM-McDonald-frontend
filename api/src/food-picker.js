@@ -36,9 +36,8 @@ function getSpecificMeal(meal, category, caloriesPerMeal) {
 		}
 		let randFoodIndex = Math.floor(Math.random() * pickedCategoryArr.length); //Pick food randomly.
 		let pickedFood = pickedCategoryArr[randFoodIndex];
-
+		_.remove(meal, (o) => o['Id'] === pickedFood['Id']);
 		picked.push(pickedFood); //Add picked food to result.
-
 		caloriesPerMeal -= pickedFood['Calories']; // decrease the calories per meal.
 	}
 	return picked;
