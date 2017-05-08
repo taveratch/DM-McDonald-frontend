@@ -36,6 +36,10 @@ module.exports = {
 		});
 		return res;
 	},
+
+  /*
+    Get catagories which are match with a cluster.
+  */
 	getCluster: (centroids, userCentroid) => {
 		let clusters = {};
     // initiate clusters object.
@@ -58,5 +62,26 @@ module.exports = {
 		});
 
 		return clusters;
+	},
+
+  /*
+    Get the most suitable cluster name along with matched point and total point.
+  */
+	getClusterName: (clusters) => {
+		let clusterName = '';
+		let max = Number.MIN_SAFE_INTEGER;
+
+		_.forEach(clusters, (value, key) => {
+			if(value.length > max) {
+				max = value.length;
+				clusterName = key;
+			}
+		});
+
+		return {
+			'cluster_name' : clusterName,
+			'matched_point' : max,
+			'total_point' : headers.length
+		};
 	}
 };
