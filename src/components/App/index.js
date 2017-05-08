@@ -39,7 +39,6 @@ class App extends React.Component {
 		let rawData = ([]);
 		fetch('/api/user/result?gender=' + this.state.gender + '&age=' + this.state.age, { accept: 'application/json'}).then((response) => {
 			response.json().then((result) => {
-				console.log(result);
 				fetch('/api/centroids', { accept: 'application/json'}).then((response) => {
 					response.json().then((res) => {
 						rawData = ([
