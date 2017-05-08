@@ -9,13 +9,15 @@ export const init = (type, eleId, rawData, title, subtitle) => {
 		data.addColumn('number', 'Cluster 1');
 		data.addColumn('number', 'Cluster 2');
 		data.addColumn('number', 'Cluster 3');
+		data.addColumn('number', 'You');
 		data.addRows(rawData);
 
 		var options = {
 			chart: {
-				title: 'Box Office Earnings in First Two Weeks of Opening',
-				subtitle: 'in millions of dollars (USD)'
+				title: title,
+				subtitle: subtitle
 			},
+			height: 500
 		};
 
 		var chart = new window.google.charts.Line(document.getElementById(eleId));
