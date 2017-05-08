@@ -11,7 +11,7 @@ class Menu extends React.Component {
         </div>
         <div className="media-body">
           <h4 className="media-heading">{ this.props.item.Item }</h4>
-          <p>{ this.props.item.Category } ({ this.props.item.Calories })</p>
+          <p>{ this.props.item.Category } ({ parseInt(this.props.item.Calories) } Cal)</p>
         </div>
       </div>
     );
