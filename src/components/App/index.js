@@ -3,15 +3,34 @@ import React from 'react';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 import Menu from './menu.js';
+import { init } from './chart.js';
 import './style.css';
 
 class App extends React.Component {
 
 	componentWillMount() {
 		configureAnchors({scrollDuration: 1000});
-		fetch('/api/centroids', { accept: 'application/json'}).then( (response) => {
+	}
+
+	componentDidMount() {
+		let rawData = ([]);
+		fetch('/api/centroids', { accept: 'application/json'}).then((response) => {
 			response.json().then((res) => {
-				console.log(res);
+				rawData = ([
+					['Calories', parseFloat(res[0].Calories), parseFloat(res[1].Calories), parseFloat(res[2].Calories)],
+					['Total_Fat', parseFloat(res[0].Total_Fat), parseFloat(res[1].Total_Fat), parseFloat(res[2].Total_Fat)],
+					['Carbohydrates', parseFloat(res[0].Carbohydrates), parseFloat(res[1].Carbohydrates), parseFloat(res[2].Carbohydrates)],
+					['Protein', parseFloat(res[0].Protein), parseFloat(res[1].Protein), parseFloat(res[2].Protein)],
+					['Sugars', parseFloat(res[0].Sugars), parseFloat(res[1].Sugars), parseFloat(res[2].Sugars)],
+					['Sodium', parseFloat(res[0].Sodium), parseFloat(res[1].Sodium), parseFloat(res[2].Sodium)],
+					['Dietary_Fibre_g', parseFloat(res[0].Dietary_Fibre_g), parseFloat(res[1].Dietary_Fibre_g), parseFloat(res[2].Dietary_Fibre_g)],
+					['Vitamin_A_re_DV', parseFloat(res[0].Vitamin_A_re_DV), parseFloat(res[1].Vitamin_A_re_DV), parseFloat(res[2].Vitamin_A_re_DV)],
+					['Vitamin_C_mg_DV', parseFloat(res[0].Vitamin_C_mg_DV), parseFloat(res[1].Vitamin_C_mg_DV), parseFloat(res[2].Vitamin_C_mg_DV)],
+					['Calcium_mg_DV', parseFloat(res[0].Calcium_mg_DV), parseFloat(res[1].Calcium_mg_DV), parseFloat(res[2].Calcium_mg_DV)],
+					['Iron_mg_DV', parseFloat(res[0].Iron_mg_DV), parseFloat(res[1].Iron_mg_DV), parseFloat(res[2].Iron_mg_DV)],
+				]);
+
+				init(['line'], 'graph', rawData, 'Title', 'Subtitle');
 			});
 		});
 	}
@@ -82,6 +101,8 @@ class App extends React.Component {
 								</div>
 							</div>
 						</ScrollableAnchor>
+
+						<div id="graph" style={{height: '300px', padding: '10px', marginBottom: '50px'}} ></div>
 					</div>
 				</div>
       </div>
