@@ -6,8 +6,6 @@ const _ = require('lodash');
 
   @return : a list of meal which contains only breakfast.
 */
-
-
 function getSpecificMeal(meal, category) {
 	return _.filter(meal, (o) => _.lowerCase(o['Category']) === _.lowerCase(category));
 }
