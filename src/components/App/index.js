@@ -3,6 +3,7 @@ import React from 'react';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 import Menu from './menu.js';
+import ChartModal from './modal.js';
 import { init } from './chart.js';
 import './style.css';
 
@@ -11,6 +12,9 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			result: [],
+			gender: '',
+			age: -1,
 			isSubmitted: false
 		};
 	}
@@ -19,11 +23,23 @@ class App extends React.Component {
 		configureAnchors({scrollDuration: 1000});
 	}
 
+	handleChangeGender(e) {
+		this.setState({
+			gender: e.target.value,
+		});
+	}
+
+	handleChangeAge(e) {
+		this.setState({
+			age: e.target.value,
+		});
+	}
+
 	onSubmit() {
 		let rawData = ([]);
-		fetch('/api/user/result?gender=' + this.refs.gender.value + '&age=' + this.refs.age.value, { accept: 'application/json'}).then((response) => {
+		fetch('/api/user/result?gender=' + this.state.gender + '&age=' + this.state.age, { accept: 'application/json'}).then((response) => {
 			response.json().then((result) => {
-				console.log(result.user_centroid);
+				console.log(result);
 				fetch('/api/centroids', { accept: 'application/json'}).then((response) => {
 					response.json().then((res) => {
 						rawData = ([
@@ -43,6 +59,7 @@ class App extends React.Component {
 						init(['line'], 'graph', rawData, 'Title', 'Subtitle');
 
 						this.setState({
+							result: result,
 							isSubmitted: true
 						});
 
@@ -56,16 +73,16 @@ class App extends React.Component {
 		return (
       <div className="App">
         <NavBar />
-				<div className="container">
-					<div className="section-greeting">
+				<div className="section-greeting">
+					<div>
 						<ScrollableAnchor id={'greeting'}>
 							<div>
 								<h1>McDonald's Healthy Meal Generator</h1>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-								<div className="row">
+								<div className="container">
 									<div className="col-md-offset-4 col-md-2">
-										<select className="form-control" ref="gender">
+										<select className="form-control" ref="gender" onChange={ this.handleChangeGender.bind(this) }>
 											<option value="" disabled selected>Select your gender</option>
 											<option value="male">Male</option>
 											<option value="female">Female</option>
@@ -73,11 +90,12 @@ class App extends React.Component {
 									</div>
 
 									<div className="col-md-2">
-										<input type="number" className="form-control" ref="age" min="1" max="107" placeholder="Select your age"/>
+										<input type="number" className="form-control" ref="age" min="1" max="107" placeholder="Select your age" onChange={ this.handleChangeAge.bind(this) } />
 									</div>
 								</div>
 
-								<a className="btn btn-default btn-generate" href="#meal" onClick={ this.onSubmit.bind(this) }>Generate</a>
+								<a className="btn btn-default btn-generate" href="#meal"
+									disabled={ this.state.gender == '' || this.state.age < 0 } onClick={ this.onSubmit.bind(this) }>Generate</a>
 							</div>
 						</ScrollableAnchor>
 					</div>
@@ -91,30 +109,32 @@ class App extends React.Component {
 										<div className="row">
 											<div className="col-md-4">
 												<h2 className="text-center">Breakfast</h2>
-												<Menu />
-												<Menu />
-												<Menu />
+												<div className="menu-list">
+													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
+													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
+												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Lunch</h2>
-												<Menu />
-												<Menu />
-												<Menu />
+												<div className="menu-list">
+													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
+													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
+												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Dinner</h2>
-												<Menu />
-												<Menu />
-												<Menu />
+												<div className="menu-list">
+													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
+													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
+												</div>
 											</div>
 										</div>
 									</div>
+									<div id="graph" style={{height: '300px'}} ></div>
 								</div>
 							</ScrollableAnchor>
-
-							<div id="graph" style={{height: '300px', padding: '10px', marginBottom: '50px'}} ></div>
 						</div>
 					}
 				</div>

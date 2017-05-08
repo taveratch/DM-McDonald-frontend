@@ -12,9 +12,6 @@ class NavBar extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Text>
-            {/* Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link> */}
-          </Navbar.Text>
           <Navbar.Text pullRight>
             <a href="#">About</a>
           </Navbar.Text>
