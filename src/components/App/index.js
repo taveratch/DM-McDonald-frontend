@@ -55,7 +55,7 @@ class App extends React.Component {
 							['Iron_mg_DV', parseFloat(res[0].Iron_mg_DV), parseFloat(res[1].Iron_mg_DV), parseFloat(res[2].Iron_mg_DV), parseFloat(result.user_centroid.Iron_mg_DV)],
 						]);
 
-						init(['line'], 'graph', rawData, 'Title', 'Subtitle');
+						init(['line'], 'graph', rawData, 'User and Food nutrients', 'The relationship between recommended nutrients and food nutrients');
 
 						this.setState({
 							result: result,
@@ -131,7 +131,7 @@ class App extends React.Component {
 											</div>
 										</div>
 									</div>
-									<div id="graph" style={{height: '300px'}} ></div>
+									<div id="graph" style={{height: '300px', padding: '30px'}} ></div>
 								</div>
 							</ScrollableAnchor>
 						</div>
