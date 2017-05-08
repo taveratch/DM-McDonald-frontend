@@ -43,7 +43,7 @@ csvAPI.get('/facts', async (req, res) => {
 
 	let factFromAge = findFactFromAge(facts, age);
 
-	res.send(factFromAge);
+	res.send(normalize.toFloat(factFromAge));
 });
 
 csvAPI.get('/centroids', async (req, res) => {
@@ -78,15 +78,10 @@ csvAPI.get('/user/result', async (req, res) => {
 	let cluster = normalize.getCluster(centroids, userCentroid);
 	let clusterName = normalize.getClusterName(cluster);
 
-	let pickedMeal = foodPicker.pick(foodWithCluster, category, fact, clusterName);
-
-	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster, 'name' : clusterName });
-});
-
-csvAPI.get('/user/pick', async (req, res) => {
-	console.log('Getting user suitable foods');
+	let pickedMeal = foodPicker.pick(foodWithCluster, category, normalize.toFloat(fact), clusterName);
 
 
+	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster, 'name' : clusterName, 'picked' : pickedMeal});
 });
 
 function findFactFromAge(facts, age) {
