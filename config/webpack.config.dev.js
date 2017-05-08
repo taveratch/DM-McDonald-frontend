@@ -216,5 +216,10 @@ module.exports = {
 		fs: 'empty',
 		net: 'empty',
 		tls: 'empty'
+	},
+	devServer: {
+		proxy: {
+			'**': 'http://localhost:4000'
+		}
 	}
 };

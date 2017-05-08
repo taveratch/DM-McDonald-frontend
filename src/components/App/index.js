@@ -1,3 +1,4 @@
+/*eslint no-console: "off"*/
 import React from 'react';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
@@ -8,6 +9,11 @@ class App extends React.Component {
 
 	componentWillMount() {
 		configureAnchors({scrollDuration: 1000});
+		fetch('/api/centroids', { accept: 'application/json'}).then( (response) => {
+			response.json().then((res) => {
+				console.log(res);
+			});
+		});
 	}
 
 	render() {
