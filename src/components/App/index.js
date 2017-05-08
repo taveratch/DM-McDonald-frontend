@@ -17,6 +17,7 @@ class App extends React.Component {
 			age: -1,
 			isSubmitted: false
 		};
+		this.randomMenu = this.randomMenu.bind(this);
 	}
 
 	componentWillMount() {
@@ -39,6 +40,7 @@ class App extends React.Component {
 		let rawData = ([]);
 		fetch('/api/user/result?gender=' + this.state.gender + '&age=' + this.state.age, { accept: 'application/json'}).then((response) => {
 			response.json().then((result) => {
+				console.log(result);
 				fetch('/api/centroids', { accept: 'application/json'}).then((response) => {
 					response.json().then((res) => {
 						rawData = ([
@@ -66,6 +68,18 @@ class App extends React.Component {
 				});
 			});
 		});
+	}
+
+	randomMenu(food) {
+		const NUMBER_OF_MENU = 2;
+		let menus = [];
+		for(let i=NUMBER_OF_MENU; i>0; i--) {
+			let index = parseInt(Math.random() * food.length);
+			menus.push(food[index]);
+			if(food.length >= i)
+				food.splice(index, 1);
+		}
+		return menus;
 	}
 
 	render() {
@@ -109,24 +123,27 @@ class App extends React.Component {
 											<div className="col-md-4">
 												<h2 className="text-center">Breakfast</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
-													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
+													{
+                            this.randomMenu(this.state.result.picked.breakfast).map((each) => <Menu item={each}/>)
+                          }
 												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Lunch</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
-													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
+                          {
+                            this.randomMenu(this.state.result.picked.lunch).map((each) => <Menu item={each}/>)
+                          }
 												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Dinner</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
-													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
+                          {
+                            this.randomMenu(this.state.result.picked.dinner).map((each) => <Menu item={each}/>)
+                          }
 												</div>
 											</div>
 										</div>
