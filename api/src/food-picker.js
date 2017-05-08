@@ -7,6 +7,10 @@ const _ = require('lodash');
   @return : a list of meal which contains only breakfast.
 */
 
+const BREAKFAST = 'breakfast';
+const LUNCH = 'lunch';
+const DINNER = 'dinner';
+
 let categories = {
 	'breakfast' : ['breakfast', 'coffee & tea'],
 	'lunch' : ['beef & pork', 'snacks & sides', 'beverages', 'smoothies & shakes'],
@@ -23,11 +27,12 @@ function getMealFromClusterName(data, cluster) {
 }
 
 module.exports = {
-	pick: (food, category, userFact, cluster) => {
+	pick: (food, userFact, cluster) => {
 		let meal = getMealFromClusterName(food, cluster);
     // console.log(meal);
-		let mealFromCategory = getSpecificMeal(meal, category);
-
-		return mealFromCategory;
+		let breakfast = getSpecificMeal(meal, 'breakfast');
+		let lunch = getSpecificMeal(meal, 'lunch');
+		let dinner = getSpecificMeal(meal, 'dinner');
+		return {breakfast, lunch, dinner};
 	},
 };

@@ -61,7 +61,6 @@ csvAPI.get('/user/result', async (req, res) => {
 	let gender = _.lowerCase(req.query['gender']) || 'male'; //male by default
 	gender = _.includes(GENDERS, gender) ? gender : 'male'; //Verify the input, male by default
 	let age = parseInt(req.query['age']) || 20;
-	let category = _.lowerCase(req.query['category']) || 'breakfast';
 
 	let dataLocation = __dirname + '/data/menu.csv';
 	let factsLocation = __dirname + `/data/facts-${gender}.csv`;
@@ -78,7 +77,7 @@ csvAPI.get('/user/result', async (req, res) => {
 	let cluster = normalize.getCluster(centroids, userCentroid);
 	let clusterName = normalize.getClusterName(cluster);
 
-	let pickedMeal = foodPicker.pick(foodWithCluster, category, normalize.toFloat(fact), clusterName);
+	let pickedMeal = foodPicker.pick(foodWithCluster, normalize.toFloat(fact), clusterName);
 
 
 	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster, 'name' : clusterName, 'picked' : pickedMeal});
