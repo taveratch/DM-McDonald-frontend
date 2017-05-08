@@ -10,8 +10,8 @@ class Menu extends React.Component {
           <img src={ image } className="media-object" style={{width: '60px'}} />
         </div>
         <div className="media-body">
-          <h4 className="media-heading">Menu name</h4>
-          <p>Lorem ipsum dolor sit amet</p>
+          <h4 className="media-heading">{ this.props.item.Item }</h4>
+          <p>{ this.props.item.Category } ({ this.props.item.Calories })</p>
         </div>
       </div>
     );
