@@ -52,7 +52,8 @@ csvAPI.get('/user/centroid', async (req, res) => {
 	let fact = findFactFromAge(facts, age);
 	let userCentroid = normalize.normalize(results, fact); // male
 	let cluster = normalize.getCluster(centroids, userCentroid);
-	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster});
+	let clusterName = normalize.getClusterName(cluster);
+	res.send({ 'user_centroid' : userCentroid, 'cluster' : cluster, 'name' : clusterName });
 });
 
 function findFactFromAge(facts, age) {
