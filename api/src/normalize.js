@@ -83,5 +83,13 @@ module.exports = {
 			'matched_point' : max,
 			'total_point' : headers.length
 		};
+	},
+
+	toFloat: (data) => {
+		let result = {};
+		_.forEach(data, (value, key) => {
+			result[key] = parseFloat(value);
+		});
+		return result;
 	}
 };
