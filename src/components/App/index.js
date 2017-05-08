@@ -3,7 +3,6 @@ import React from 'react';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 import Menu from './menu.js';
-import ChartModal from './modal.js';
 import { init } from './chart.js';
 import './style.css';
 
@@ -39,6 +38,7 @@ class App extends React.Component {
 		let rawData = ([]);
 		fetch('/api/user/result?gender=' + this.state.gender + '&age=' + this.state.age, { accept: 'application/json'}).then((response) => {
 			response.json().then((result) => {
+				console.log(result);
 				fetch('/api/centroids', { accept: 'application/json'}).then((response) => {
 					response.json().then((res) => {
 						rawData = ([
@@ -109,24 +109,27 @@ class App extends React.Component {
 											<div className="col-md-4">
 												<h2 className="text-center">Breakfast</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
-													<Menu item={ this.state.result.picked.breakfast[parseInt(Math.random() * this.state.result.picked.breakfast.length)] } />
+													{ this.state.result.picked.breakfast.map((item) => {
+														return (<Menu item={ item } />);
+													}) }
 												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Lunch</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
-													<Menu item={ this.state.result.picked.lunch[parseInt(Math.random() * this.state.result.picked.lunch.length)] } />
+													{ this.state.result.picked.lunch.map((item) => {
+														return (<Menu item={ item } />);
+													}) }
 												</div>
 											</div>
 
 											<div className="col-md-4">
 												<h2 className="text-center">Dinner</h2>
 												<div className="menu-list">
-													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
-													<Menu item={ this.state.result.picked.dinner[parseInt(Math.random() * this.state.result.picked.dinner.length)] } />
+													{ this.state.result.picked.dinner.map((item) => {
+														return (<Menu item={ item } />);
+													}) }
 												</div>
 											</div>
 										</div>
