@@ -1,5 +1,6 @@
 /*eslint no-console: "off"*/
 import React from 'react';
+import ReactDOM from 'react-dom';
 import NavBar from './nav';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 import Menu from './menu.js';
@@ -11,7 +12,12 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			result: [],
+			result: {
+				cluster: [],
+				name: [],
+				picked: [],
+				user_centroid: []
+			},
 			gender: '',
 			age: -1,
 			isSubmitted: false
@@ -20,6 +26,35 @@ class App extends React.Component {
 
 	componentWillMount() {
 		configureAnchors({scrollDuration: 1000});
+	}
+
+	getOffset(element){
+		let bounding = element.getBoundingClientRect();
+		return {
+			top: bounding.top + document.body.scrollTop,
+			left: bounding.left + document.body.scrollLeft
+		};
+	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll.bind(this));
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll.bind(this));
+	}
+
+	handleScroll() {
+		let navbar = ReactDOM.findDOMNode(this.refs.navbar);
+		let startElement = ReactDOM.findDOMNode(this.refs.meal);
+		let offset = this.getOffset(startElement);
+		let windowsScrollTop  = window.pageYOffset;
+		if(windowsScrollTop <= offset.top) {
+			navbar.classList.add('page-scroll');
+		}
+		else {
+			navbar.classList.remove('page-scroll');
+		}
 	}
 
 	handleChangeGender(e) {
@@ -71,13 +106,13 @@ class App extends React.Component {
 	render() {
 		return (
       <div className="App">
-        <NavBar />
+        <NavBar ref="navbar"/>
 				<div className="section-greeting">
 					<div>
 						<ScrollableAnchor id={'greeting'}>
 							<div>
 								<h1>McDonald's Healthy Meal Generator</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								<p>based on gender and age</p>
 
 								<div className="container">
 									<div className="col-md-offset-4 col-md-2">
@@ -100,7 +135,7 @@ class App extends React.Component {
 					</div>
 
 					{ this.state.isSubmitted &&
-						<div className="section-meal">
+						<div className="section-meal" ref="meal">
 							<ScrollableAnchor id={'meal'}>
 								<div>
 									<h1>Your Meal</h1>
@@ -110,7 +145,7 @@ class App extends React.Component {
 												<h2 className="text-center">Breakfast</h2>
 												<div className="menu-list">
 													{ this.state.result.picked.breakfast.map((item) => {
-														return (<Menu item={ item } />);
+														return (<Menu key={ item.Id } item={ item } />);
 													}) }
 												</div>
 											</div>
@@ -119,7 +154,7 @@ class App extends React.Component {
 												<h2 className="text-center">Lunch</h2>
 												<div className="menu-list">
 													{ this.state.result.picked.lunch.map((item) => {
-														return (<Menu item={ item } />);
+														return (<Menu key={ item.Id } item={ item } />);
 													}) }
 												</div>
 											</div>
@@ -128,11 +163,16 @@ class App extends React.Component {
 												<h2 className="text-center">Dinner</h2>
 												<div className="menu-list">
 													{ this.state.result.picked.dinner.map((item) => {
-														return (<Menu item={ item } />);
+														return (<Menu key={ item.Id } item={ item } />);
 													}) }
 												</div>
 											</div>
 										</div>
+									</div>
+									<div>
+										<h4>Group 1 focuses on { this.state.result.cluster.cluster_0.toString() }</h4>
+										<h4>Group 2 focuses on { this.state.result.cluster.cluster_1.toString() }</h4>
+										<h4>Group 3 focuses on { this.state.result.cluster.cluster_2.toString() }</h4>
 									</div>
 									<div id="graph" style={{height: '300px', padding: '30px'}} ></div>
 								</div>
