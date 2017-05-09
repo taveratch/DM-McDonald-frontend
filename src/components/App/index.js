@@ -18,6 +18,11 @@ class App extends React.Component {
 				picked: [],
 				user_centroid: []
 			},
+			cluster: {
+				'cluster_0': 'Group 1',
+				'cluster_1': 'Group 2',
+				'cluster_2': 'Group 3'
+			},
 			gender: '',
 			age: -1,
 			isSubmitted: false
@@ -138,7 +143,7 @@ class App extends React.Component {
 						<div className="section-meal" ref="meal">
 							<ScrollableAnchor id={'meal'}>
 								<div>
-									<h1>Your Meal</h1>
+									<h1>You are in { this.state.cluster[this.state.result.name.cluster_name] }</h1>
 									<div className="container">
 										<div className="row">
 											<div className="col-md-4">
