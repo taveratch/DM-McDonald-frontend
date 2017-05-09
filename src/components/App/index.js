@@ -12,7 +12,12 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			result: [],
+			result: {
+				cluster: [],
+				name: [],
+				picked: [],
+				user_centroid: []
+			},
 			gender: '',
 			age: -1,
 			isSubmitted: false
@@ -107,7 +112,7 @@ class App extends React.Component {
 						<ScrollableAnchor id={'greeting'}>
 							<div>
 								<h1>McDonald's Healthy Meal Generator</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								<p>based on gender and age</p>
 
 								<div className="container">
 									<div className="col-md-offset-4 col-md-2">
@@ -163,6 +168,11 @@ class App extends React.Component {
 												</div>
 											</div>
 										</div>
+									</div>
+									<div>
+										<h4>Group 1 focuses on { this.state.result.cluster.cluster_0.toString() }</h4>
+										<h4>Group 2 focuses on { this.state.result.cluster.cluster_1.toString() }</h4>
+										<h4>Group 3 focuses on { this.state.result.cluster.cluster_2.toString() }</h4>
 									</div>
 									<div id="graph" style={{height: '300px', padding: '30px'}} ></div>
 								</div>
